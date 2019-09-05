@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cnn.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/regression.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/classification.css') }}"> 
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugin/L.Control.Zoomslider.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugin/L.Control.MousePosition.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugin/L.Control.Pan.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugin/L.Control.Sidebar.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugin/easy-button.css') }}">
+
+  <title>Malaria Detection and Prevention</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato|Playfair+Display" rel="stylesheet">
+
+</head>
+  
+<body>
+
+    <div class = "section container">
+        <h2>Malaria</h2>
+        <div id='introduction'>
+            <p>Malaria is a serious and sometimes fatal disease caused by a parasite that commonly 
+            infects a certain type of mosquito which feeds on humans. <br>People who get malaria 
+            are typically very sick with high fevers, shaking chills, and flu-like illness.</p>
+        </div>
+    </div>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span> 
+        <span class="dot" onclick="currentSlide(2)"></span> 
+        <span class="dot" onclick="currentSlide(3)"></span> 
+    </div>
+        
+    <header id = "background">
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        
+    </header>
+
+    <!-- Malaria world trend -->
+    <div class = "section container">
+
+        <h2>Empirical View</h2>
+
+        <section>
+
+            <h3>Malaria death by Countries</h3>
+            <p>Malaria occurs mostly in poor, tropical and subtropical areas of the world. Africa is the most affected due to a combination of factors:</p>
+            <ol>
+                <li>A very efficient mosquito (Anopheles gambiae  complex) is responsible for high transmission.</li>
+                <li>The predominant parasite species is Plasmodium falciparum , which is the species that is most likely to cause severe malaria and death.</li>
+                <li>Local weather conditions often allow transmission to occur year round.</li>
+                <li>Scarce resources and socio-economic instability have hindered efficient malaria control activities.</li>
+                <li>In other areas of the world, malaria is a less prominent cause of deaths, but can cause substantial disease and incapacitation, especially in some countries in South America and South Asia.</li>
+            </ol>
+
+            <form name="Trends">
+                <p class = "radio-btn" style="margin:0.5rem 1rem 0.5rem 0">
+                    <label>
+                    <input name="Trend" type="radio" checked value="Sunburst">
+                    <span><i class="material-icons">pie_chart</i></span>
+                    </label>
+                </p>
+                <p class="radio-btn" style="margin:0.5rem 1rem">
+                    <label>
+                    <input name="Trend" type="radio" value="Map">
+                    <span><i class="material-icons">map</i></span>
+                    </label>
+                </p>
+            </form>
+
+            <div id="sun-burst"></div>
+            <svg id = "map" width="960" height="600"></svg>
+
+            <div class="row">
+
+                <form action="#" class = "col m8 card-panel push-m2">
+                    <p class="range-field">
+                        <input type="range" id="range" min="2000" max="2017" step="1" value="2017"/>
+                    </p>
+                </form>
+
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section>
+
+            <h3>Malaria death by Age Groups</h3>
+            <p>At a global level, the most vulnerable age group to malaria deaths are children under five years old — in 2017 they accounted for 57 percent of total deaths. 
+                The number of deaths from malaria tends to decrease with age; with those over 70 years old accounting for around five percent. 
+                When age categories are combined, children under 14 years old account for more than two-thirds of mortality. 
+            </p>
+
+            <div class="row">
+                <div id="area" class="col m9 push-m1"></div>
+            </div>
+
+        </section>
+    
+    </div>
+
+    <div class = "section container">
+        <h2>Prediction and Prevention</h2>
+        <section>
+            <h3>Malaria and Mosquitoes Population</h3>
+            <p>There are four kinds of parasites that can infect humans with malaria via mosquito vectors, 
+                the Plasmodium falciparum, vivax, ovale, and malariae. Humans become infected with malaria when bitten by a parasitized female Anopheles mosquito. 
+                There are over 400 different species of the Anopheles mosquito, of which about 30 are malaria vectors of major importance. 
+                These mosquitoes become infectious after having a previous blood meal from an infected person. They obtain blood to nurture their eggs, which then also become infected.
+            </p>
+            <h4>Mosquitoes Population Over-time (in Africa)</h4>
+            <p>In order to design national malaria control and elimination programs, it is important to understand the distribution of the anopheline mosquitoes. 
+                The KEMRI-Wellcome Trust organization compiled a comprehensive dataset of all the published and unpublished studies that contain geocoded information on the anopheline mosquitoes in Africa. 
+                DISCLAIMER: The map does not depict the temporal trend in mosquito population, but the number of studies on those mosquitoes in Africa and where they were found.</p>
+            <div id="leaflet-side-bar">
+                <label>Year Category</label>
+                <select class="browser-default" id="period-select">
+                    <option value="default" disabled selected>Choose your option</option>
+                    {% for period in periods %}
+                    <option value="{{ period }}">{{ period }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div id="mosquitoes-vector"></div>
+          
+        </section>
+        <hr>
+        <section>
+            <h3>Malaria and Other Factors</h3>
+            <h4>Regression Model</h4>
+            <p>The prevalence of Malaria is associated with many other social and environmental factors, including climate, economics, public health facilities, etc. 
+                We used linear and quadratic models to explore the determinants of Malaria.</p>
+            <div class="row">
+                <div class="s12 col m10 s12 push-m1">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Regression by Death Count</span>
+                            <div id="regression-plot"></div>
+                        </div>
+                        <div class="card-action">
+                            <form>
+                                <div class="row">
+                                    <div class="input-field col m5 push-m1 card-panel">
+                                        <select class="icons" id="feature-select">
+                                            <option value="GDP"selected>GDP Per Capital</option>
+                                            <option value="Child Mortality" >Child Mortality </option>
+                                            <option value="Percipitation">Percipitation</option>
+                                            <option value="Temperature">Temperature</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col m5 push-m1 card-panel">
+                                        <select class="icons" id="model-select">
+                                            <option value="linear" selected>Linear</option>
+                                            <option value="quadratic" >Quadratic</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                            </form>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+
+        </section>
+        <hr>
+        <section>
+            <h4>Classification Model</h4>
+            <p>The classification model country's incident counts within year 2017, categorized as "incident counts below 5000" and "incident counts above 5000". We use precipitation
+                and temperature as features. The results indicate the malaria incident tends to happen in warmer places. 
+            </p>
+            <div class="row">
+                <div class="col m8 s12 push-m2">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Classification by Incidents Count</span>
+                            <div id="classification-chart"></div>
+                        </div>
+                        <div class="card-action">
+                            <form>
+                                <div class="row">
+                                    <!-- <div class="input-field col m6 card-panel">
+                                        <form action="#">
+                                            <label>Classification Threshold</label>
+                                            <p class="range-field">
+                                                <input type="range" name="beta" min="100" max="10000" step="100" value="5000" id="threshold"> 
+                                            </p>
+                                        </form>
+                                    </div> -->
+
+                                    <div class="input-field col m10 push-m1 card-panel">   
+                                        <label id="beta_val"></label>
+                                        <input type="range" name="beta" min="0" max="1.0" step="0.01" oninput=displayBeta(this.value) onchange=runGradientDescent(this.value)>           
+                                    </div>
+
+                                </div>
+                                
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class = "section container">
+        <h2>Malaria Detection</h2>
+
+        <h3>Blood Cell Images to Identify Malaria</h3>
+        <p>Malaria parasites go through a series of steps to infect humans. When an infected mosquito bites a human, the parasite enters the bloodstream, 
+            multiplies in the liver cells, and is then released back into the bloodstream, where it infects and destroys red blood cells. Parasites invade 
+            red blood cells to evade the immune system and to remodel them for their own use.
+        </p>
+
+        <div class="row">
+
+            <div class="col s12 m5">
+
+                <ul class="collapsible">
+                    
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-book-medical"></i>Cell Image Detection</div>
+                        <div class="collapsible-body teal lighten-5"><span>Malaria parasites can be identified by examining under the microscope a drop of the patient’s blood, spread out as a “blood smear” on a microscope slide. 
+                            Prior to examination, the specimen is stained to give the parasites a distinctive appearance. 
+                            This technique remains the gold standard for laboratory confirmation of malaria. </span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-database"></i>Data</div>
+                        <div class="collapsible-body teal lighten-5"><span>
+                            The dataset comes from <a href="https://www.kaggle.com/iarunava/cell-images-for-detecting-malaria">Kaggle</a>. 
+                            The parasitized (infected) cell images are inside the Parasitized folder and uninfected images are inside the Uninfected folder.
+                        </span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="fas fa-laptop-medical"></i>Our Method</div>
+                        <div class="collapsible-body teal lighten-5"><span>
+                            We built a convolutional neural network model to predict which cell images are infected with malaria. 
+                            The final sequential model has about 95% training accuracy and 93% validation accuracy. 
+                            The input layer is a 2D convolutional layer, with 32 filters, 3x3 kernel size, 96x96x3 input shape, rectified linear activation function. 
+                            The input layer is followed by batch normalization, 2D max pooling with a 2x2 pool size, and a 40% dropout rate in order to reduce overfitting. 
+                            We put in two hidden 2D convolutional layers with similar specifications as the input layer; the first hidden layer has 64 filters. 
+                            We added a flatten layer to reshape the tensor to 1D. This was followed up with a dense layer with 64 units, rectified linear activation, and a 40% dropout rate. 
+                            The output layer is a dense layer with 1 unit and sigmoid activation. We compiled the model with an Adam optimizer, binary crossentropy loss function, and accuracy metric. 
+                            In the model generator, we used 200 steps per epoch, 10 epochs, and 20 validation steps. To see our model building process more in depth, please visit our 
+                            <a href="https://github.com/lhatpku/Project-3---Malaria-Detection-and-Prevention/blob/master/ml/Malaria_CNN.ipynb" target="_blank">GitHub page</a>.
+                        </span></div>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col s12 m6 push-m1">
+                <div class="card">
+
+                    <div class="card-action center">
+
+                        <form id="upload-file" method="post" enctype="multipart/form-data">
+                            <label for="imageUpload" class="upload-label">
+                                <i class="fas fa-file-upload"></i>
+                            </label>
+                            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+                        </form>
+
+                    </div>
+
+                    <div class="card-image center">
+                        <div class="image-section" style="display:none;">
+                            <div class="img-preview center">
+                                <div id="imagePreview">
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content center">
+                        <div class="loader" style="display:none;"></div>
+
+                        <h3 id="result">
+                            <span> </span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="page-footer grey darken-3">
+        <div class="container">
+            <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <h5>About The Project</h5>
+                <p>The project explores the following questions: What is malaria and how does it impact humans? 
+                    How can we detect malaria? What can we do to better control it? To answer these questions, 
+                    we built a convolutional neural network model to detect the disease at the cellular level and different regression models to determine methods of control and prevention.
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">
+            &copy; 2019 Project - Malaria Detection and Prevention: Hao Lu | Eric Yang | Tracy Guo
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/leaflet-src.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugin/L.Control.Zoomslider.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugin/L.Control.MousePosition.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugin/L.Control.Pan.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugin/L.Control.Sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugin/easy-button.js') }}"></script>
+
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.9.0/math.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('select').formSelect();
+            $('.collapsible').collapsible();
+        });
+    </script>
+    
+    <script src="{{ url_for('static', filename='js/background.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/trend_sunburst.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/trend_map.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vector_map.js') }}"></script>
+    <!-- Only for area chart -->
+    <script src="{{ url_for('static', filename='js/trend_area.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cnn.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/radio.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/regression.js') }}"></script> 
+    <!-- <script src="{{ url_for('static', filename='js/math.js') }}"></script>  -->
+    <script src="{{ url_for('static', filename='js/classification.js') }}"></script> 
+
+  </body>

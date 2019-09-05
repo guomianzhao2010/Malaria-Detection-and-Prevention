@@ -1,0 +1,50 @@
+.pts {
+  stroke: #595959;
+}
+
+.group1 {
+  fill: steelblue;
+}
+
+.group2 {
+  fill: red;
+}
+
+line {
+  fill: none;
+  opacity: 0.6;
+}
+
+#dec_boundary {
+  stroke: #000000;
+  stroke-width: 2px;
+}
+
+#dec_boundary_m {
+  stroke: #008000;
+  stroke-width: 4px;
+}
+
+#beta_val {
+  font-family: sans-serif;
+  position: relative;
+  left: 20px;
+}
+
+.d3-tip {
+  padding: 6px;
+  font-size: 12px;
+  line-height: 1;
+  line-height: 1.5em;
+  color: #fff;
+  text-align: center;
+  text-transform: capitalize;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+}
+
+.country_text {
+  font-family: sans-serif;
+  fill: #fff;
+  text-anchor: middle;
+}

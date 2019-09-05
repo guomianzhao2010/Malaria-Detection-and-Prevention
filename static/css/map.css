@@ -1,0 +1,23 @@
+.sphere {
+    fill: white;
+  }
+  
+  .country {
+    stroke: black;
+    stroke-width: 0.05px;
+  }
+  
+  .country:hover {
+    fill: red;
+  }
+  
+  .tick text {
+    font-size: 1em;
+    fill: black;
+    font-family: sans-serif;
+  }
+  
+  .tick circle {
+    stroke: black;
+    stroke-opacity: 0.8;
+  }
