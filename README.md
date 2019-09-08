@@ -8,3 +8,5 @@ People who get malaria are typically very sick with high fevers, shaking chills,
 While Malaria could be life threatening, it is also preventable and treatable. Common preventive methods include using bite prevention, taking anti-malaria pills, and early diagnosis.A Malaria vaccine is going through clinial trials in multiple countries to provide protection from the parasite.
 
 In the first section of the project, we created data visualizations to explore the prevalanece and distribution of Malaria around the world. 
+
+!(image1)[Incidence.png]
