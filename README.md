@@ -9,4 +9,7 @@ While Malaria could be life threatening, it is also preventable and treatable. C
 
 In the first section of the project, we created data visualizations to explore the prevalanece and distribution of Malaria around the world. 
 
-!(image1)[Incidence.png]
+![image1](Incidence.png)
+![image2](Age.png)
+![image4](Mosquitos.png)
+![image3](Linear_reg.png)
