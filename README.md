@@ -28,7 +28,7 @@ The prevalence of Malaria is associated with many other social and environmental
 
 ![image3](Linear_reg.png)
 
-## Use Machine learning to Detect Malaria
+## Using Machine learning to Detect Malaria
 We built a convolutional neural network model to predict which cell images are infected with malaria. The final sequential model has about 95% training accuracy and 93% validation accuracy. The input layer is a 2D convolutional layer, with 32 filters, 3x3 kernel size, 96x96x3 input shape, rectified linear activation function. The input layer is followed by batch normalization, 2D max pooling with a 2x2 pool size, and a 40% dropout rate in order to reduce overfitting. We put in two hidden 2D convolutional layers with similar specifications as the input layer; the first hidden layer has 64 filters. We added a flatten layer to reshape the tensor to 1D. This was followed up with a dense layer with 64 units, rectified linear activation, and a 40% dropout rate. The output layer is a dense layer with 1 unit and sigmoid activation. We compiled the model with an Adam optimizer, binary crossentropy loss function, and accuracy metric. In the model generator, we used 200 steps per epoch, 10 epochs, and 20 validation steps. To see our model building process more in depth, please visit our Github page: https://github.com/lhatpku/Project-3---Malaria-Detection-and-Prevention/blob/master/ml/Malaria_CNN.ipynb
 
 ![image6](CNN.png)
